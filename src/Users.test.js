@@ -1,8 +1,13 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 import Users from "./Pages/Users";
 
 test("Render halaman User dengan benar", async () => {
-  render(<Users />);
+  render(
+    <MemoryRouter>
+      <Users />
+    </MemoryRouter>
+  );
 
   // Mencari text tertentu
   const title = screen.getByText(/Username/i);
@@ -16,13 +21,10 @@ test("Render halaman User dengan benar", async () => {
   expect(btn).toHaveTextContent("Back to Home");
 
   // menunggu proses fetch user dari API
-  // kita kasih waktu sebanyak 5 deit
-  // kemudain mencari sebuah nama dari API
-  const user = await waitFor(
-    () => {
-      return screen.findByText("Leanne Graham");
-    },
-    { timeout: 5000 }
-  );
+  // kita kasih waktu sebanyak 5 detik
+  // kemudian mencari sebuah nama dari API
+  const user = await waitFor(() => screen.findByText("Leanne Graham"), {
+    timeout: 5000,
+  });
   expect(user).toBeInTheDocument();
 });

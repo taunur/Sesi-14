@@ -1,12 +1,9 @@
 import React from "react";
-import Footer from "./Footer";
-import Navbar from "./Navbar";
 import { Outlet, Link } from "react-router-dom";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
       {/* content */}
       <div className="p-5 mt-4 mb-4 bg-light rounded-3">
         <div className="container-fluid py-5">
@@ -24,7 +21,6 @@ export default function Home() {
         </div>
         <Outlet />
       </div>
-      <Footer />
     </>
   );
 }
